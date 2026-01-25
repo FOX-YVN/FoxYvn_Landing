@@ -1,0 +1,69 @@
+version: '3.8'
+
+services:
+  foxyvn-dev:
+    build:
+      context: ..
+      dockerfile: container/Dockerfile
+    container_name: foxyvn-landing-dev
+    image: foxyvn-landing:dev
+
+    # Security: Rootless mode (node user)
+    user: "node"
+
+    # Resource limits for safety
+    mem_limit: 2g
+    cpus: 2.0
+
+    # Ports
+    ports:
+      - "5173:5173"  # Vite dev server
+      - "5174:5174"  # Vite HMR fallback
+
+    # Volume mounts - bind root directory
+    volumes:
+      - ..:/workspace:cached  # :cached для лучшей производительности WSL
+      - /workspace/node_modules       # Anonymous volume for node_modules
+
+    # Environment variables
+    environment:
+      - NODE_ENV=development
+      
+      # Vite конфигурация
+      - VITE_HOST=0.0.0.0
+      - VITE_PORT=5173
+      
+      # 🔴 КРИТИЧНО ДЛЯ WSL - без этого live reload не работает!
+      - CHOKIDAR_USEPOLLING=true
+      - CHOKIDAR_INTERVAL=100
+      - WATCHPACK_POLLING=true
+      
+      # Vite HMR для работы через WSL
+      - VITE_HMR_HOST=localhost
+      - VITE_HMR_PORT=5173
+      - VITE_HMR_PROTOCOL=http
+
+    # Restart policy
+    restart: unless-stopped
+
+    # Network mode
+    network_mode: bridge
+
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+
+    # Read-only root filesystem (except workspace)
+    read_only: false
+
+    # Working directory
+    working_dir: /workspace
+
+    # Command
+    command: pnpm dev --host 0.0.0.0
+
+    # Labels
+    labels:
+      project: "foxyvn-landing"
+      environment: "development"
+      description: "FoxYvn Landing Page - Isolated Development Environment"

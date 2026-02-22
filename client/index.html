@@ -9,7 +9,7 @@
     <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
     <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()" />
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://fonts.googleapis.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://analytics.umami.is; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' %VITE_ANALYTICS_ENDPOINT%; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' %VITE_ANALYTICS_ENDPOINT%; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
 
     <meta
       name="viewport"
@@ -29,28 +29,28 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Fox Yvn | Armenian Telegram Shop" />
     <meta property="og:description" content="Fox Yvn - Armenian Telegram Shop | Contact us in Telegram @FoxiOperator , @FoxYvn_Channel" />
-    <meta property="og:image" content="%VITE_SITE_URL%/fox-logo-256.webp" />
-    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%%BASE_URL%fox-logo-256.webp" />
+    <meta property="og:url" content="%VITE_SITE_URL%%BASE_URL%" />
     <meta property="og:site_name" content="FoxYvn.com" />
 
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Fox Yvn | Armenian Telegram Shop" />
     <meta name="twitter:description" content="Fox Yvn - Armenian Telegram Shop | Contact us in Telegram @FoxiOperator , @FoxYvn_Channel" />
-    <meta name="twitter:image" content="%VITE_SITE_URL%/fox-logo-256.webp" />
+    <meta name="twitter:image" content="%VITE_SITE_URL%%BASE_URL%fox-logo-256.webp" />
 
     <meta property="telegram:channel" content="@FOXYVN_CHANNEL" />
 
-    <link rel="icon" type="image/png" href="/fox-logo-64.webp" />
-    <link rel="apple-touch-icon" href="/fox-logo-256.webp" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/fox-logo-256.webp" />
-    <link rel="canonical" href="%VITE_SITE_URL%/" />
+    <link rel="icon" type="image/png" href="%BASE_URL%fox-logo-64.webp" />
+    <link rel="apple-touch-icon" href="%BASE_URL%fox-logo-256.webp" />
+    <link rel="apple-touch-icon" sizes="180x180" href="%BASE_URL%fox-logo-256.webp" />
+    <link rel="canonical" href="%VITE_SITE_URL%%BASE_URL%" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
 
-    <link rel="preload" href="/fox-logo-64.webp" as="image" />
+    <link rel="preload" href="%BASE_URL%fox-logo-64.webp" as="image" />
   </head>
 
   <body>
@@ -61,7 +61,7 @@
       </div>
     </noscript>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script type="module" src="%BASE_URL%src/main.tsx"></script>
   </body>
 
 </html>

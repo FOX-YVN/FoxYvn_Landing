@@ -6,19 +6,35 @@ import { fileURLToPath } from "url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+function getOrigin(value?: string) {
+  if (!value) return undefined;
+  try {
+    return new URL(value).origin;
+  } catch {
+    return undefined;
+  }
+}
+
 async function startServer() {
   const app = express();
   const server = createServer(app);
 
-  // Security headers middleware
+  // Заголовки безопасности
   app.use((req, res, next) => {
+    const analyticsEndpoint =
+      process.env.ANALYTICS_ENDPOINT ||
+      process.env.VITE_ANALYTICS_ENDPOINT ||
+      "https://analytics.umami.is";
+    const analyticsOrigin = getOrigin(analyticsEndpoint);
+    const analyticsSource = analyticsOrigin ? ` ${analyticsOrigin}` : "";
+
     res.setHeader('Content-Security-Policy',
       "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline'; " +
+      `script-src 'self'${analyticsSource}; ` +
       "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; " +
       "font-src 'self' https://fonts.gstatic.com; " +
       "img-src 'self' data: https:; " +
-      "connect-src 'self' https://analytics.umami.is; " +
+      `connect-src 'self'${analyticsSource}; ` +
       "frame-ancestors 'none'; " +
       "base-uri 'self'; " +
       "form-action 'self';"

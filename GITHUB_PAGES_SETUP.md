@@ -105,6 +105,10 @@ https://e3fe3.github.io/Fox_Yvn_Landing/
    - Иногда GitHub Pages обновляется с задержкой
    - Очистите кэш браузера (Ctrl+F5)
 
+4. **Проверьте переменные окружения**
+   - `VITE_SITE_URL` должен быть задан для корректных OG/Canonical мета‑тегов
+   - `VITE_ANALYTICS_ENDPOINT` опционален (если используете Umami)
+
 ---
 
 ## 🐛 Если Workflow падает с ошибкой

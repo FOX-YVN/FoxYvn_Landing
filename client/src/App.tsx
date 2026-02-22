@@ -6,7 +6,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Header from "./components/Header";
 import Home from "./pages/Home";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export type Language = "hy" | "en" | "ru";
 
@@ -30,6 +30,10 @@ function Router({ language }: { language: Language }) {
 
 function App() {
   const [language, setLanguage] = useState<Language>("hy");
+
+  useEffect(() => {
+    document.documentElement.lang = language;
+  }, [language]);
 
   return (
     <ErrorBoundary>

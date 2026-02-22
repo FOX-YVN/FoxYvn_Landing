@@ -41,6 +41,7 @@ const descriptions: Record<
 export default function Home({ language }: HomeProps) {
   const [shouldAnimate, setShouldAnimate] = useState(true);
   const letterStaggerMs = 22;
+  const baseUrl = import.meta.env.BASE_URL;
 
   const trackButtonClick = (buttonName: string) => {
     if (typeof window !== "undefined" && window.umami) {
@@ -67,7 +68,7 @@ export default function Home({ language }: HomeProps) {
 
   const animate = (classes: string) => (shouldAnimate ? classes : "");
 
-  const animatedDescription = useMemo(() => {
+  const description = useMemo(() => {
     const copy = descriptions[language];
     const segments = [
       { text: copy.titlePrefix, highlight: false },
@@ -76,6 +77,8 @@ export default function Home({ language }: HomeProps) {
       { text: copy.titleReliability, highlight: true },
       { text: copy.titleSuffix, highlight: false },
     ];
+
+    const plainText = segments.map(segment => segment.text).join("");
 
     let index = 0;
     const nodes: React.ReactNode[] = [];
@@ -113,6 +116,7 @@ export default function Home({ language }: HomeProps) {
           <span
             key={`${segmentKey}-word-${wordIndex}`}
             className={`lang-word${highlight ? " highlight-word" : ""}`}
+            aria-hidden="true"
           >
             {letterNodes}
           </span>
@@ -132,7 +136,7 @@ export default function Home({ language }: HomeProps) {
       nodes.push(...chunk);
     });
 
-    return nodes;
+    return { nodes, plainText };
   }, [language]);
 
   return (
@@ -147,9 +151,9 @@ export default function Home({ language }: HomeProps) {
               )}`}
             >
               <picture className="block overflow-visible">
-                <source srcSet="/fox-logo-256.webp" type="image/webp" />
+                <source srcSet={`${baseUrl}fox-logo-256.webp`} type="image/webp" />
                 <img
-                  src="/fox-logo.png"
+                  src={`${baseUrl}fox-logo.png`}
                   alt="FoxYvn Logo"
                   width="224"
                   height="224"
@@ -173,11 +177,13 @@ export default function Home({ language }: HomeProps) {
             {/* Description */}
             <p
               key={language}
+              aria-label={description.plainText}
               className={`text-sm sm:text-base md:text-lg text-muted-foreground max-w-xl mx-auto leading-relaxed ${animate(
                 "animate-fade-in-up animation-delay-600"
               )} ${language === "en" ? "lang-en-one-line" : ""}`}
             >
-              {animatedDescription}
+              <span className="sr-only">{description.plainText}</span>
+              <span aria-hidden="true">{description.nodes}</span>
             </p>
           </div>
 

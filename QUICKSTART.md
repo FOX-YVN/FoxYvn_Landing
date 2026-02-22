@@ -6,7 +6,7 @@
 
 ## ✅ Что Готово
 
-1. **Репозиторий склонирован** из GitHub: `~/lab/foxyvn-landing/project/`
+1. **Репозиторий склонирован** из GitHub: `~/lab/foxyvn_pod/foxyvn-landing/`
 2. **Podman контейнер собран и запущен:** `foxyvn-landing-dev`
 3. **Vite dev server работает:** доступен на **http://localhost:5173**
 4. **AGENTS.md создан** - инструкции для Codex AI веб-дизайнера
@@ -74,7 +74,7 @@ Codex настроен как профессиональный веб-дизай
 ### Запуск анализа
 
 ```bash
-cd ~/lab/foxyvn-landing/project
+cd ~/lab/foxyvn_pod/foxyvn-landing
 codex
 ```
 
@@ -96,7 +96,7 @@ codex
 ### Или запусти с конкретной задачей
 
 ```bash
-cd ~/lab/foxyvn-landing/project
+cd ~/lab/foxyvn_pod/foxyvn-landing
 
 # Проверка responsive design
 codex "Проверь responsive design на всех breakpoints (320px, 768px, 1024px, 1440px+). Исправь все проблемы с адаптацией."
@@ -116,14 +116,14 @@ codex "Проверь TypeScript code quality, исправь все антип�
 ## 📁 Структура Проекта
 
 ```
-~/lab/foxyvn-landing/
-├── project/                    # Исходный код (изменяй здесь!)
-│   ├── client/src/            # React компоненты
-│   ├── AGENTS.md              # 🔥 Инструкции для Codex
-│   └── package.json
+~/lab/foxyvn_pod/foxyvn-landing/
+├── client/                     # React код (изменяй здесь!)
+│   ├── src/                    # Компоненты и страницы
+│   └── index.html
 ├── container/                  # Docker конфигурация
 │   ├── Dockerfile
 │   └── docker-compose.yml
+├── AGENTS.md                   # 🔥 Инструкции для Codex
 ├── README.md                   # Полная документация
 ├── QUICKSTART.md               # Этот файл
 └── manage.sh                   # Скрипт управления (опционально)
@@ -135,17 +135,17 @@ codex "Проверь TypeScript code quality, исправь все антип�
 
 ### Файлы синхронизируются автоматически!
 
-Изменяй файлы в `~/lab/foxyvn-landing/project/` любым редактором:
+Изменяй файлы в `~/lab/foxyvn_pod/foxyvn-landing/` любым редактором:
 
 ```bash
 # VS Code
-code ~/lab/foxyvn-landing/project
+code ~/lab/foxyvn_pod/foxyvn-landing
 
 # Vim
-vim ~/lab/foxyvn-landing/project/client/src/App.tsx
+vim ~/lab/foxyvn_pod/foxyvn-landing/client/src/App.tsx
 
 # Nano
-nano ~/lab/foxyvn-landing/project/client/src/App.tsx
+nano ~/lab/foxyvn_pod/foxyvn-landing/client/src/App.tsx
 ```
 
 **Hot Module Replacement работает** - изменения видны сразу в браузере!
@@ -241,7 +241,7 @@ podman run -d \
   --name foxyvn-landing-dev \
   --user node \
   -p 5173:3000 \
-  -v ~/lab/foxyvn-landing/project:/workspace:rw \
+  -v ~/lab/foxyvn_pod/foxyvn-landing:/workspace:rw \
   -v foxyvn-node-modules:/workspace/node_modules \
   --memory=2g \
   --cpus=2 \
@@ -280,7 +280,7 @@ http://localhost:5173
 
 ### 2. Запусти Codex анализ
 ```bash
-cd ~/lab/foxyvn-landing/project
+cd ~/lab/foxyvn_pod/foxyvn-landing
 codex "Ты - веб-дизайнер эксперт. Проанализируй этот landing page: UI/UX, responsive, a11y, performance, code quality. Исправь все проблемы. Читай AGENTS.md."
 ```
 
@@ -293,7 +293,7 @@ Codex автоматически:
 
 ### 4. Посмотри изменения
 ```bash
-cd ~/lab/foxyvn-landing/project
+cd ~/lab/foxyvn_pod/foxyvn-landing
 git diff
 ```
 
@@ -322,7 +322,7 @@ git push
 Он сам принимает решения и исправляет код. Просто запусти и жди результата.
 
 ### AGENTS.md - твой лучший друг
-Обнови `project/AGENTS.md` если:
+Обнови `AGENTS.md` если:
 - Изменилась архитектура
 - Добавились новые правила кодирования
 - Нужны специфичные инструкции для AI

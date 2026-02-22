@@ -116,5 +116,5 @@ pnpm build
 - Переменные окружения в 1Password
 - .env файлы исключены из git
 - Права доступа .env: 600 (только владелец)
-- No inline scripts
+- No inline scripts (CSP блокирует inline)
 - Resource limits для контейнера

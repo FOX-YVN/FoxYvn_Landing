@@ -54,6 +54,8 @@ pnpm run preview
 - **Build directory**: `dist/public`
 - **Workflow**: `.github/workflows/deploy.yml`
 - **Vite config**: `vite.config.ts`
+- **Meta/OG ссылки**: используют `VITE_SITE_URL`
+- **Ассеты**: используют `%BASE_URL%` (не ломаются на GitHub Pages)
 
 ## 🐛 Troubleshooting
 
